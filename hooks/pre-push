@@ -1,0 +1,41 @@
+#!/bin/sh
+# ========================================================================================
+# Git-Chain: Enterprise Pre-Push Verification Hook
+# ========================================================================================
+# Installed in .git/hooks/pre-push
+# Blocks unauthorized pushes with unverified GPG signatures or critical AI anomalies.
+# ========================================================================================
+
+echo ""
+echo "========================================================================"
+echo " [GIT-CHAIN] DevSecOps Pre-Push Guard Active"
+echo " Target Remote: $1 | Target URL: $2"
+echo "========================================================================"
+
+# Run AI Anomaly scan and audit check
+python -c "
+import git_chain
+app = git_chain.GitChainApp()
+app.cmd_capture('attack')
+findings = app.anomaly_engine.scan_telemetry(app.logs, app.commits)
+criticals = [f for f in findings if f.severity in ('CRITICAL', 'HIGH')]
+if criticals:
+    print('\033[91m[GIT-CHAIN BLOCKED] Pre-push aborted: ' + str(len(criticals)) + ' security violations detected!\033[0m')
+    for c in criticals:
+        print('  - ' + c.rule_id + ': ' + c.title)
+    print('\033[93mRemediation: Resolve security violations before pushing to protected branch.\033[0m')
+    exit(1)
+else:
+    print('\033[92m[GIT-CHAIN PASSED] Zero supply-chain anomalies detected. Proceeding with push.\033[0m')
+    exit(0)
+"
+
+EXIT_CODE=$?
+if [ $EXIT_CODE -ne 0 ]; then
+    echo "========================================================================"
+    echo " [GIT-CHAIN ERROR] Push rejected by security policy."
+    echo "========================================================================"
+    exit 1
+fi
+
+exit 0
