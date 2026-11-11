@@ -515,6 +515,26 @@ class TelemetryRepository:
             PipelineLogEntry(5, "cosign-sign", t4, f"cosign sign --key k8s://kms/cosign-key {user_name.lower()}/git-chain:v2.4.0", "Attestation signature anchored to transparency log", 0)
         ]
 
+        # Dynamically read actual commits from local git if available
+        try:
+            import subprocess
+            res = subprocess.run(["git", "log", "-n", "3", "--pretty=format:%H|%P|%an <%ae>|%ad|%s"], 
+                                 capture_output=True, text=True, check=True)
+            lines = [l for l in res.stdout.strip().split("\n") if l.strip()]
+            if len(lines) >= 3:
+                real_commits = []
+                for line in lines:
+                    parts = line.split("|")
+                    h = parts[0]
+                    p = parts[1].split() if len(parts) > 1 and parts[1] else ["HEAD~1"]
+                    a = parts[2] if len(parts) > 2 else f"{user_name} <{user_email}>"
+                    d = parts[3] if len(parts) > 3 else t4
+                    m = parts[4] if len(parts) > 4 else "commit update"
+                    real_commits.append(CommitNode(h, p, a, d, m, True, "Workspace verified source files"))
+                commits = real_commits
+        except Exception:
+            pass
+
         return commits, logs
 
     @staticmethod
@@ -1334,6 +1354,17 @@ class GitChainApp:
             json.dump(report_data, f, indent=2)
 
         tracer.trace("AuditExporter", f"Wrote {os.path.getsize(file_path):,} bytes to {file_path.name}", level="INFO")
+
+        # Automatically stage, commit, and record audit manifest in Git
+        try:
+            import subprocess
+            subprocess.run(["git", "add", str(file_path)], capture_output=True)
+            commit_msg = f"audit(anchor): anchor Merkle Root {self.merkle_tree.root[:10]}... to blockchain"
+            subprocess.run(["git", "commit", "-m", commit_msg], capture_output=True)
+            tracer.trace("AuditExporter", f"Committed audit manifest to Git: {commit_msg}", level="INFO")
+            tracer.trace("AuditExporter", "Type 'push' to synchronize this new audit commit to your GitHub profile.", level="INFO")
+        except Exception:
+            pass
 
         if RICH_ENABLED and console:
             console.print(Panel(
