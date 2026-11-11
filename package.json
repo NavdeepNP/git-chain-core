@@ -1,0 +1,11 @@
+{
+  "name": "git-chain-core",
+  "version": "2.4.0",
+  "description": "Enterprise DevSecOps Blockchain Anchoring & AI Log Anomaly Verifier",
+  "author": "NavdeepNP <navdeepmalik077@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "python tests/test_git_chain.py",
+    "verify": "python verify_audit.py"
+  }
+}
