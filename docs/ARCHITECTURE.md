@@ -54,7 +54,7 @@ sequenceDiagram
     participant CI as CI/CD Runner / Git Hook
     participant GC as Git-Chain Engine
     participant SC as GitChainAnchor.sol (Sepolia)
-    actor Auditor as Faculty / Security Auditor
+    actor Auditor as External Security Auditor
 
     Dev->>CI: git push origin main
     CI->>GC: Ingest Commit DAG & Execution Logs

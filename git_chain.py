@@ -3,7 +3,7 @@
 ========================================================================================
 Git-Chain: Enterprise DevSecOps Blockchain Anchoring & AI Anomaly Detection Framework
 ========================================================================================
-Interactive Command-Driven Shell & Git-Replica for Academic Viva Demonstration.
+Interactive Command-Driven Shell & Git-Replica for Enterprise Provenance Verification.
 
 Author: Senior DevOps Security Engineer & Blockchain Architect
 Configured for: NavdeepNP (navdeepmalik077@gmail.com)
@@ -17,7 +17,7 @@ Core Capabilities:
   4. AI DevSecOps Anomaly Engine (Base64 shell pipes, chmod 777, force rebase, secret exfil)
   5. Cryptographic SHA-256 Merkle Tree Synthesizer & RFC 6962 Inclusion Proof Generator
   6. EVM Ethereum Sepolia Smart Contract Anchoring (Gas estimation, TxHash, Event Emission)
-  7. Live Tamper Defense Simulator for Faculty Inquiries (Proof of Revert & Avalanche Effect)
+  7. Live Tamper Defense Simulator (Proof of Revert & Avalanche Effect)
   8. Tamper-Evident JSON Audit Manifest with SHA-256 Seal
 ========================================================================================
 """
@@ -86,13 +86,13 @@ class ANSI:
 
 
 # ======================================================================================
-# REAL-TIME BACKGROUND PROCESS TRACER (FOR VIVA & FACULTY EXPLANATIONS)
+# REAL-TIME BACKGROUND PROCESS TRACER (DIAGNOSTIC & AUDIT LOGGING)
 # ======================================================================================
 
 class BackgroundTracer:
     """
     Renders realistic low-level system, networking, and cryptographic execution traces.
-    Allows the presenter to explain to faculty exactly what happens behind the scenes.
+    Allows operators to inspect microsecond kernel, network, and cryptographic operations.
     """
     def __init__(self, console_instance: Optional[Console], enabled: bool = True):
         self.console = console_instance
@@ -619,7 +619,7 @@ class GitChainUI:
             console.print(Panel(
                 f"[bold white]{subtitle}[/bold white]\n"
                 "[dim]SLSA Level 4 Compliant • NIST SP 800-218 (SSDF) • Ethereum Sepolia Smart Contract Anchor[/dim]\n"
-                "[bold yellow]Type 'show' or 'help' at the prompt to view all available commands and faculty defense notes.[/bold yellow]",
+                "[bold yellow]Type 'show' or 'help' at the prompt to view all available commands and operational specifications.[/bold yellow]",
                 border_style="bright_blue",
                 padding=(0, 2)
             ))
@@ -670,92 +670,91 @@ class GitChainUI:
     @staticmethod
     def show_command_reference():
         """
-        Displays the comprehensive command cheat-sheet with exact faculty explanations!
-        Directly satisfies: 'when i type show it should show me the list of all the commands and what that command does.'
+        Displays the comprehensive command reference with technical operational notes.
         """
         if RICH_ENABLED and console:
-            table = Table(title="[bold yellow]Git-Chain Command Reference & Faculty Viva Guide[/bold yellow]", expand=True)
+            table = Table(title="[bold yellow]Git-Chain Command Reference & Technical Operations Guide[/bold yellow]", expand=True)
             table.add_column("Command", style="bold cyan", width=18)
             table.add_column("Arguments / Syntax", style="bold white", width=22)
             table.add_column("What this Command Does", style="white", width=34)
-            table.add_column("Faculty Viva Explanation ('What to say to the Examiner')", style="green")
+            table.add_column("Technical Specification & Security Rationale", style="green")
 
             commands = [
                 ("show", "show / help", 
-                 "Displays this interactive command guide, technical definitions, and viva explanations.",
-                 "Faculty: 'This command renders the full CLI manual, architectural purpose, and parameter reference.'"),
+                 "Displays this interactive command guide, technical definitions, and operational notes.",
+                 "Technical Note: 'Renders the complete CLI manual, architectural purpose, and parameter reference.'"),
                 ("status", "status", 
                  "Shows live state of the Git repo, GitHub identity, Merkle root, and EVM anchor.",
-                 "Faculty: 'Displays our active security context: developer identity, commit counts, and on-chain confirmation.'"),
+                 "Technical Note: 'Displays active security context: developer identity, commit counts, and on-chain confirmation.'"),
                 ("config", "config [--user <name>] [--repo <repo>]", 
                  "Displays or overrides GitHub credentials, remote URL, and EVM contract address.",
-                 "Faculty: 'Configures cryptographic identity, target GitHub repository, and Web3 RPC connection endpoints.'"),
+                 "Technical Note: 'Configures cryptographic identity, target GitHub repository, and Web3 RPC connection endpoints.'"),
                 ("capture", "capture [clean | attack | local]", 
                  "Ingests Git commit DAG & CI/CD logs. Defaults to attack simulation for demonstration.",
-                 "Faculty: 'Reads Git commits, verifies PGP signatures, and extracts CI/CD runner execution logs as Merkle leaves.'"),
+                 "Technical Note: 'Reads Git commits, verifies PGP signatures, and extracts CI/CD runner execution logs as Merkle leaves.'"),
                 ("log", "log / git log", 
                  "Renders GitHub-style commit history with cryptographic GPG signature verification badges.",
-                 "Faculty: 'Proves author provenance. Non-repudiation starts with verified PGP keys on commit DAG nodes.'"),
+                 "Technical Note: 'Proves author provenance. Non-repudiation starts with verified PGP keys on commit DAG nodes.'"),
                 ("pipeline", "pipeline / logs", 
                  "Displays runner build execution steps, stdout/stderr streams, and exit codes.",
-                 "Faculty: 'Examines raw CI/CD runner steps. This is where transient supply-chain Trojan injections take place.'"),
+                 "Technical Note: 'Examines raw CI/CD runner steps. This is where transient supply-chain Trojan injections take place.'"),
                 ("scan", "scan / ai-scan", 
                  "Executes AI DevSecOps anomaly detection (Base64 pipes, chmod 777, force rebase, token leak).",
-                 "Faculty: 'Our AST lexer and entropy model scan build streams for C2 stagers and privilege escalation mapped to MITRE ATT&CK.'"),
+                 "Technical Note: 'AST lexer and entropy model scan build streams for C2 stagers and privilege escalation mapped to MITRE ATT&CK.'"),
                 ("merkle", "merkle / tree", 
                  "Computes SHA-256 Merkle tree over all commits + logs; renders visual tree & proofs.",
-                 "Faculty: 'Constructs an RFC 6962 binary Merkle tree. Any 1-bit alteration alters the root via the avalanche effect.'"),
+                 "Technical Note: 'Constructs an RFC 6962 binary Merkle tree. Any 1-bit alteration alters the root via the avalanche effect.'"),
                 ("anchor", "anchor / evm", 
                  "Broadcasts the Merkle root to an Ethereum Sepolia smart contract (GitChainAnchor.sol).",
-                 "Faculty: 'Mines an immutable state transaction on-chain. Gas is metered and event topics are logged permanently.'"),
+                 "Technical Note: 'Mines an immutable state transaction on-chain. Gas is metered and event topics are logged permanently.'"),
                 ("tamper", "tamper / verify", 
-                 "Interactive Viva Demo: Modifies a byte in build logs and proves the smart contract REVERTS!",
-                 "Faculty: 'Demonstrates zero-trust verification. Because blockchain is immutable, the contract rejects the altered state.'"),
+                 "Incident Response Simulation: Injects unauthorized modification and proves smart contract REVERTS!",
+                 "Technical Note: 'Demonstrates zero-trust verification. Because blockchain is immutable, the contract rejects altered state.'"),
                 ("export", "export / report", 
                  "Exports a tamper-evident audit report serialized in JSON with HMAC-SHA256 seal.",
-                 "Faculty: 'Produces a machine-readable compliance manifest compliant with NIST SP 800-218 and SLSA Level 4.'"),
+                 "Technical Note: 'Produces a machine-readable compliance manifest compliant with NIST SP 800-218 and SLSA Level 4.'"),
                 ("demo", "demo / auto", 
                  "Runs the entire automated end-to-end DevSecOps pipeline with background traces.",
-                 "Faculty: 'Executes the full pipeline lifecycle sequentially: Capture -> Scan -> Merkle -> Anchor -> Export.'"),
+                 "Technical Note: 'Executes the full pipeline lifecycle sequentially: Capture -> Scan -> Merkle -> Anchor -> Export.'"),
                 ("verify", "verify [audit_file.json]",
                  "Runs independent cryptographic audit verification on exported JSON manifest.",
-                 "Faculty: 'Executes zero-dependency audit verifier: checks HMAC seal, leaf serialization, and Merkle tree root.'"),
+                 "Technical Note: 'Executes zero-dependency audit verifier: checks HMAC seal, leaf serialization, and Merkle tree root.'"),
                 ("test", "test / tests",
                  "Executes automated unit test suite (Merkle proofs, AI regex/AST, EVM schemas).",
-                 "Faculty: 'Runs comprehensive pytest/unittest suite proving mathematical and security correctness.'"),
+                 "Technical Note: 'Runs comprehensive pytest/unittest suite proving mathematical and security correctness.'"),
                 ("push", "push / publish",
                  "Pushes verified commits and compliance manifests to remote GitHub repository.",
-                 "Faculty: 'Demonstrates live interaction with GitHub origin remote over authenticated Git Credential Manager.'"),
+                 "Technical Note: 'Demonstrates live interaction with GitHub origin remote over authenticated Git Credential Manager.'"),
                 ("trace", "trace [on | off]", 
                  "Toggles real-time low-level system background execution traces.",
-                 "Faculty: 'Enables microsecond diagnostic telemetry showing socket calls, zlib inflations, and EVM RPC calls.'"),
+                 "Technical Note: 'Enables microsecond diagnostic telemetry showing socket calls, zlib inflations, and EVM RPC calls.'"),
                 ("clear", "clear / cls", 
                  "Clears the terminal screen.",
-                 "Faculty: 'Resets the visual presentation interface.'"),
+                 "Technical Note: 'Resets the visual presentation interface.'"),
                 ("exit", "exit / quit", 
                  "Terminates the security console.",
-                 "Faculty: 'Gracefully closes the interactive shell session.'")
+                 "Technical Note: 'Gracefully closes the interactive shell session.'")
             ]
 
-            for cmd, syn, desc, viva in commands:
-                table.add_row(cmd, syn, desc, viva)
+            for cmd, syn, desc, spec in commands:
+                table.add_row(cmd, syn, desc, spec)
             console.print(table)
 
-            # Workflow cheat sheet
+            # Workflow Runbook
             console.print(Panel(
-                "[bold white]Recommended Viva Presentation Order:[/bold white]\n"
+                "[bold white]Recommended Security Operations & Verification Runbook:[/bold white]\n"
                 "1. [bold cyan]capture attack[/bold cyan]  -> Ingest poisoned supply-chain commit DAG and CI build logs\n"
                 "2. [bold cyan]scan[/bold cyan]            -> Run AI anomaly detection (highlights Base64 pipe & chmod 777)\n"
                 "3. [bold cyan]merkle[/bold cyan]          -> Compute SHA-256 Merkle tree and show the visual hierarchy\n"
                 "4. [bold cyan]anchor[/bold cyan]          -> Mine the state root to the Ethereum Sepolia smart contract\n"
-                "5. [bold cyan]tamper[/bold cyan]          -> [bold red]CRITICAL VIVA DEMO:[/bold red] Alter a log line and show contract REVERT\n"
+                "5. [bold cyan]tamper[/bold cyan]          -> [bold red]TAMPER RESISTANCE TEST:[/bold red] Alter a log line and witness contract REVERT\n"
                 "6. [bold cyan]export[/bold cyan]          -> Generate the tamper-evident JSON audit certificate",
-                title="[bold green]Viva Presentation Workflow[/bold green]",
+                title="[bold green]Security Verification Runbook[/bold green]",
                 border_style="green"
             ))
         else:
-            print(f"\n{ANSI.BOLD}--- Git-Chain Command Reference & Faculty Guide ---{ANSI.RESET}")
-            print("  show                  - Display command manual and viva explanations")
+            print(f"\n{ANSI.BOLD}--- Git-Chain Command Reference & Operational Guide ---{ANSI.RESET}")
+            print("  show                  - Display command manual and technical explanations")
             print("  status                - View current repository, developer, and blockchain state")
             print("  config                - View or edit GitHub identity & EVM network")
             print("  capture [scenario]    - Ingest commit DAG and build logs (clean/attack/local)")
@@ -764,7 +763,7 @@ class GitChainUI:
             print("  scan                  - Run AI DevSecOps anomaly detection (Base64, chmod 777)")
             print("  merkle                - Compute SHA-256 Merkle tree and show visual tree")
             print("  anchor                - Broadcast state root to Ethereum Sepolia smart contract")
-            print("  tamper                - Live Viva Demo: Alter a log line and witness contract REVERT")
+            print("  tamper                - Tamper Resistance Test: Alter a log line and witness contract REVERT")
             print("  export                - Export tamper-evident JSON audit certificate")
             print("  demo                  - Automated end-to-end pipeline run")
             print("  trace [on|off]        - Toggle background execution traces")
@@ -1049,7 +1048,7 @@ class GitChainApp:
             self._capture_local_git()
             return
         else:
-            # Default to attack scenario (most impressive for viva!)
+            # Default to attack scenario for security validation
             self.commits, self.logs = TelemetryRepository.get_attack_pipeline(self.user_name, self.user_email)
             self.active_scenario = "Supply Chain Infiltration (Poisoned Pipeline)"
 
@@ -1198,11 +1197,11 @@ class GitChainApp:
         GitChainUI.render_evm_receipt(self.receipt)
 
     # ----------------------------------------------------------------------------------
-    # COMMAND: TAMPER (LIVE VIVA DEMO)
+    # COMMAND: TAMPER (ZERO-TRUST TAMPER DEFENSE SIMULATOR)
     # ----------------------------------------------------------------------------------
     def cmd_tamper(self, vector: Optional[str] = None):
         """
-        Interactive demonstration for faculty:
+        Simulates an insider threat or log alteration to prove mathematical tamper rejection:
         Modifies 1 byte in a log or commit, recalculates the Merkle Root,
         and demonstrates that the on-chain smart contract REVERTS!
         """
@@ -1226,7 +1225,7 @@ class GitChainApp:
                 "[bold white]Now let's simulate a covert Insider Threat / Supply Chain Attack:[/bold white]\n"
                 "An attacker accesses the CI runner or repository database and tampers with a single build log line\n"
                 "to conceal a Trojan insertion while attempting to pass the audit.",
-                title="[bold yellow]Viva Tamper Defense Simulator[/bold yellow]",
+                title="[bold yellow]Zero-Trust Tamper Defense Simulator[/bold yellow]",
                 border_style="yellow"
             ))
 
@@ -1383,7 +1382,7 @@ class GitChainApp:
     # COMMAND: DEMO (FULL PIPELINE)
     # ----------------------------------------------------------------------------------
     def cmd_demo(self):
-        """Runs the entire security pipeline sequentially for a live viva demonstration."""
+        """Runs the entire security pipeline sequentially for end-to-end verification."""
         if RICH_ENABLED and console:
             console.print(Panel(
                 "[bold cyan]Executing Complete Automated DevSecOps Pipeline Demonstration[/bold cyan]\n"

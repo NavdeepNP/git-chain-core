@@ -1,15 +1,15 @@
 # Git-Chain: Decentralized DevSecOps Provenance & Blockchain Anchoring Architecture
-**End-Semester Capstone Project Report**  
-*Department of Computer Science & Engineering | Blockchain & Information Security Specialization*
+**Enterprise Engineering Specification & Security Architecture Report**  
+*Software Supply Chain Security & Distributed Ledger Technology*
 
-**Candidate:** NavdeepNP (`navdeepmalik077@gmail.com`)  
+**Lead Architect:** NavdeepNP (`navdeepmalik077@gmail.com`)  
 **Repository:** [https://github.com/NavdeepNP/git-chain-core](https://github.com/NavdeepNP/git-chain-core)  
 **Smart Contract:** `contracts/GitChainAnchor.sol` (EVM Sepolia / ERC-6384 Spec)  
 
 ---
 
 ## 1. Abstract
-Modern software delivery pipelines are vulnerable to complex supply chain attacks (e.g., SolarWinds, Codecov). Traditional Version Control Systems (VCS) like Git provide cryptographic integrity over file trees via Directed Acyclic Graphs (DAGs), but fail to protect against transient CI/CD runner exploits, unauthorized non-fast-forward history rewrites (`git push --force`), and build log modification. This capstone project introduces **Git-Chain**, an enterprise-grade DevSecOps security architecture that combines:
+Modern software delivery pipelines are vulnerable to complex supply chain attacks (e.g., SolarWinds, Codecov). Traditional Version Control Systems (VCS) like Git provide cryptographic integrity over file trees via Directed Acyclic Graphs (DAGs), but fail to protect against transient CI/CD runner exploits, unauthorized non-fast-forward history rewrites (`git push --force`), and build log modification. This project introduces **Git-Chain**, an enterprise-grade DevSecOps security architecture that combines:
 1. **AI Heuristic Anomaly Detection:** Real-time tokenization and Shannon entropy scanning of CI/CD execution streams for privilege escalation, obfuscated Base64 shell pipes, and token exfiltration mapped to the MITRE ATT&CK matrix.
 2. **RFC 6962 Pairwise SHA-256 Merkle Synthesis:** Digesting Git commit DAG nodes and CI/CD execution frames into a unified 32-byte Merkle root.
 3. **EVM Smart Contract State Anchoring:** Deploying an on-chain immutable audit anchor (`GitChainAnchor.sol`) to Ethereum Sepolia, providing non-repudiable proof of software build states with an $O(1)$ constant storage cost.
@@ -112,7 +112,7 @@ This guarantees state progression idempotence and prevents replay attacks.
 
 ---
 
-## 6. Conclusion & Submission Sign-Off
+## 6. Conclusion & Production Sign-Off
 Git-Chain successfully demonstrates that integrating cryptographic Merkle trees with EVM smart contracts eliminates single points of failure in DevSecOps pipelines. By decentralizing build log immutability, software provenance is mathematically guaranteed without disclosing sensitive proprietary source code.
 
-*Report submitted in partial fulfillment of the requirements for the Degree of Bachelor of Technology in Computer Science & Engineering.*
+*Architecture specification and formal engineering implementation.*

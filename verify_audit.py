@@ -7,7 +7,7 @@ Author: NavdeepNP (navdeepmalik077@gmail.com)
 Usage: python verify_audit.py <path_to_audit_report.json>
 
 Purpose:
-  An independent, zero-dependency verification utility for auditors and examination faculty.
+  An independent, zero-dependency verification utility for third-party auditors and compliance officers.
   Independently recalculates the SHA-256 Merkle root from raw commit and log entries,
   validates logarithmic inclusion proofs, and verifies the tamper-evident HMAC/SHA-256 seal.
 ========================================================================================

@@ -1,7 +1,7 @@
 # Git-Chain: Enterprise DevSecOps Blockchain Anchoring & AI Anomaly Verifier
 
-> **End-Semester Engineering Project**  
-> **Course / Track:** Blockchain Architecture, Cyber-Physical Systems & DevSecOps  
+> **Enterprise Security Framework & Cryptographic Provenance Suite**  
+> **Architecture:** Blockchain Architecture, Cyber-Physical Systems & DevSecOps  
 > **Developer Identity:** `NavdeepNP` (`navdeepmalik077@gmail.com`)  
 > **Target Repository:** `https://github.com/NavdeepNP/git-chain-core.git`  
 > **Smart Contract:** `GitChainAnchor.sol` (Ethereum Sepolia / ERC-6384 Immutability Spec)  
@@ -31,7 +31,7 @@ Run directly from PowerShell or Terminal:
 
 ```powershell
 # Navigate to directory
-cd "d:\Codes\Sem7\Blockchain\Git-End sem"
+cd "git-chain-core"
 
 # Launch interactive Git-Chain shell
 python git_chain.py
@@ -44,13 +44,13 @@ The terminal shell will launch with a Git prompt:
 
 ---
 
-## ⌨️ Command Reference & Faculty Viva Guide
+## ⌨️ Command Reference & Technical Operations Guide
 
 Type **`show`** (or `help`) at the prompt to view the full command manual:
 
-| Command | Arguments | What it Does | Faculty Viva Explanation ("What to tell the Professor") |
+| Command | Arguments | What it Does | Technical Specification & Security Rationale |
 |---|---|---|---|
-| **`show`** | `show` / `help` | Displays command reference table and viva notes. | *"Renders the full operational manual, parameter syntax, and architectural purposes."* |
+| **`show`** | `show` / `help` | Displays command reference table and operational notes. | *"Renders the full operational manual, parameter syntax, and architectural purposes."* |
 | **`status`** | `status` | Shows live state of Git repo, GitHub identity, Merkle root, and EVM status. | *"Displays our active context: developer credentials, commit counts, and on-chain confirmation."* |
 | **`config`** | `config [--user <name>] [--repo <repo>]` | Displays or updates GitHub credentials, remote URL, and EVM contract address. | *"Configures cryptographic identity, target GitHub repository, and Web3 RPC connection endpoints."* |
 | **`capture`** | `capture [clean \| attack \| local]` | Ingests Git commit DAG & CI/CD logs with real-time socket and zlib packfile traces. | *"Fetches Git commits, verifies GPG signatures, and parses CI/CD runner execution frames into Merkle leaves."* |
@@ -59,7 +59,7 @@ Type **`show`** (or `help`) at the prompt to view the full command manual:
 | **`scan`** | `scan` / `ai-scan` | Runs AI DevSecOps anomaly detection (Base64 pipes, chmod 777, force rebase, token leak). | *"Our AST lexer and entropy model scan build streams for C2 stagers and privilege escalation mapped to MITRE ATT&CK."* |
 | **`merkle`** | `merkle` / `tree` | Computes SHA-256 Merkle tree over all commits + logs; renders visual tree & proofs. | *"Constructs an RFC 6962 binary Merkle tree. Any 1-bit alteration alters the root via the avalanche effect."* |
 | **`anchor`** | `anchor` / `evm` | Broadcasts Merkle root to Ethereum Sepolia smart contract (`GitChainAnchor.sol`). | *"Mines an immutable state transaction on-chain. Gas is metered and event topics are logged permanently."* |
-| **`tamper`** | `tamper` / `tamper-demo` | Interactive Viva Demo: Modifies a byte in build logs and proves the smart contract REVERTS! | *"Demonstrates zero-trust verification. Because blockchain is immutable, the contract rejects the altered state."* |
+| **`tamper`** | `tamper` / `tamper-demo` | Incident Response Simulation: Injects unauthorized modification and proves smart contract REVERTS! | *"Demonstrates zero-trust verification. Because blockchain is immutable, the contract rejects the altered state."* |
 | **`verify`** | `verify [report.json]` | Standalone verifier: independently recalculates digital seal, raw leaves, and Merkle root. | *"Validates integrity without running the main app, proving external auditability."* |
 | **`test`** | `test` / `tests` | Runs automated 14-test verification suite (Merkle, AI rules, EVM schemas). | *"Proves system reliability and edge-case handling with full unit test coverage."* |
 | **`push`** | `push` / `publish` | Pushes authenticated repository states to your GitHub remote. | *"Demonstrates live interaction with remote GitHub repository via Git Credential Manager."* |
@@ -73,7 +73,7 @@ Type **`show`** (or `help`) at the prompt to view the full command manual:
 
 ## 🔍 Background Execution Traces (What is Happening Behind the Scenes)
 
-When you execute any command, Git-Chain streams real-time microsecond-level diagnostic logs. Use these points to answer technical questions from faculty:
+When you execute any command, Git-Chain streams real-time microsecond-level diagnostic logs:
 
 1. **`[GitTransport]`**: Connects to `api.github.com:443` over **TLS 1.3** (`ECDHE-RSA-AES128-GCM-SHA256`) using OAuth2/SSH key tokens.
 2. **`[ObjectStore]`**: Unpacks loose zlib packfile objects in `.git/objects/pack/` to parse commit trees and tree hashes.
@@ -87,61 +87,61 @@ When you execute any command, Git-Chain streams real-time microsecond-level diag
 
 ---
 
-## 🎓 Recommended Live Viva Presentation Flow
+## 🚀 Recommended System Verification & Demonstration Runbook
 
-To deliver a compelling presentation for strict faculty:
+To execute a complete operational demonstration:
 
 ```
 (git-chain) [NavdeepNP/main:clean] ❯ show
 ```
-> *Explain: "Ma'am, here is our full command suite and DevSecOps architecture."*
+> *Note: "Initializes the complete DevSecOps command suite and cryptographic runtime."*
 
 ```
 (git-chain) [NavdeepNP/main:clean] ❯ capture attack
 ```
-> *Explain: "We are fetching the commit DAG and CI/CD logs from our repository. Notice the background TLS 1.3 socket trace, object decompression, and GPG signature validation."*
+> *Note: "Fetches commit history and runner logs. Real-time background transport traces show TLS 1.3 socket negotiation, object decompression, and GPG signature verification."*
 
 ```
 (git-chain) [NavdeepNP/main:clean] ❯ scan
 ```
-> *Explain: "Our AI Anomaly Engine scans the execution stream. It detected an obfuscated Base64 shell pipe (`echo ... | base64 -d | sh`), a `chmod 777` elevation, and a `git push --force` attempt, mapped to MITRE ATT&CK techniques T1059.004 and T1222."*
+> *Note: "Our AI Anomaly Engine scans the execution stream. It detects obfuscated Base64 shell pipes (`echo ... | base64 -d | sh`), `chmod 777` elevations, and unauthorized `git push --force` attempts mapped to MITRE ATT&CK techniques T1059.004 and T1222."*
 
 ```
 (git-chain) [NavdeepNP/main:clean] ❯ merkle
 ```
-> *Explain: "We synthesize an RFC 6962 binary Merkle tree over all 8 items. Notice the calculated Merkle root and the $O(\log N)$ inclusion proof for Leaf 0."*
+> *Note: "Synthesizes an RFC 6962 binary Merkle tree across all items, producing the 32-byte Merkle root and O(log N) inclusion proofs."*
 
 ```
 (git-chain) [NavdeepNP/main:clean] ❯ anchor
 ```
-> *Explain: "We broadcast the state root to our Ethereum Sepolia smart contract (`GitChainAnchor.sol`). It consumes 48,219 gas units and emits the `CommitStateAnchored` event in Block #21,849,248."*
+> *Note: "Broadcasts the state root to the Ethereum Sepolia smart contract (`GitChainAnchor.sol`), consuming 48,219 gas units and emitting the CommitStateAnchored event."*
 
 ```
 (git-chain) [NavdeepNP/main:0x71c9] ❯ tamper
 ```
-> *Explain (The highlight): "Now suppose an insider modifies Step #3 in the build log to conceal a Trojan DLL. When we recompute the Merkle tree, the root diverges due to the SHA-256 avalanche effect. When we query the smart contract, the EVM call **REVERTS** with `ERR_HASH_MISMATCH`!"*
+> *Note: "Simulates an insider threat modifying a build log line to hide a backdoor. The SHA-256 avalanche effect causes the root to diverge, and the smart contract call REVERTS with ERR_HASH_MISMATCH!"*
 
 ```
 (git-chain) [NavdeepNP/main:0x71c9] ❯ export
 ```
-> *Explain: "We export the complete, tamper-evident JSON audit certificate featuring an HMAC-SHA256 digital seal compliant with NIST SP 800-218 and SLSA Level 4."*
+> *Note: "Exports the complete, tamper-evident JSON audit certificate featuring an HMAC-SHA256 digital seal compliant with NIST SP 800-218 and SLSA Level 4."*
 
 ```
 (git-chain) [NavdeepNP/main:0x71c9] ❯ verify
 ```
-> *Explain: "We independently verify the exported manifest using our standalone verification engine, confirming the digital seal and O(log N) inclusion proofs."*
+> *Note: "Independently verifies the exported manifest using the standalone verification engine, confirming the digital seal and O(log N) inclusion proofs."*
 
 ```
 (git-chain) [NavdeepNP/main:0x71c9] ❯ test
 ```
-> *Explain: "We run our automated 14-test verification suite covering Merkle tree odd-leaf duplication, avalanche sensitivity, and MITRE ATT&CK AI rules."*
+> *Note: "Executes the automated 14-test verification suite covering Merkle tree odd-leaf duplication, avalanche sensitivity, and MITRE ATT&CK AI rules."*
 
 ---
 
 ## 📂 Repository File Structure
 
 ```
-Git-End sem/
+git-chain-core/
 ├── contracts/
 │   └── GitChainAnchor.sol          # Solidity smart contract (EVM Sepolia / ERC-6384)
 ├── hooks/
@@ -152,8 +152,8 @@ Git-End sem/
 │   └── test_git_chain.py           # 14 automated unit tests (Merkle, AI, EVM)
 ├── docs/
 │   ├── ARCHITECTURE.md             # System architecture & sequence diagrams
-│   ├── PROJECT_REPORT.md           # Full IEEE-format capstone project report
-│   └── VIVA_CHEAT_SHEET.md         # Top 15 tough questions & winning viva answers
+│   ├── PROJECT_REPORT.md           # Technical whitepaper & architecture specification
+│   └── TECHNICAL_QNA.md            # Top 15 technical questions & architectural answers
 ├── git_chain.py                    # Main interactive Git replica & CLI shell
 ├── verify_audit.py                 # Standalone independent audit verifier
 ├── requirements.txt                # Python project dependencies
@@ -165,19 +165,10 @@ Git-End sem/
 
 ## 🔒 Pushing to Your GitHub Profile
 
-**Security Notice:** Never enter your GitHub password or private tokens into chat prompts or hardcode them into scripts.
+To synchronize this repository with your GitHub account:
 
-To publish this repository to your GitHub account:
-
-1. Create a repository on GitHub:
-   - Go to [github.com/new](https://github.com/new).
-   - Enter repository name: `git-chain-core`.
-   - Leave "Add a README file" **unchecked** (we already have this README).
-   - Click **Create repository**.
-
-2. From PowerShell or your terminal in this directory, run:
-   ```powershell
-   git push -u origin main
-   ```
-   Windows Git Credential Manager will securely open a browser authentication window asking you to authorize Git. Click **Authorize**, and Git will securely upload all files to your profile!
+```powershell
+git push -u origin main
+```
+Windows Git Credential Manager handles secure authentication automatically.
 
