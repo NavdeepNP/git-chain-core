@@ -59,7 +59,10 @@ Type **`show`** (or `help`) at the prompt to view the full command manual:
 | **`scan`** | `scan` / `ai-scan` | Runs AI DevSecOps anomaly detection (Base64 pipes, chmod 777, force rebase, token leak). | *"Our AST lexer and entropy model scan build streams for C2 stagers and privilege escalation mapped to MITRE ATT&CK."* |
 | **`merkle`** | `merkle` / `tree` | Computes SHA-256 Merkle tree over all commits + logs; renders visual tree & proofs. | *"Constructs an RFC 6962 binary Merkle tree. Any 1-bit alteration alters the root via the avalanche effect."* |
 | **`anchor`** | `anchor` / `evm` | Broadcasts Merkle root to Ethereum Sepolia smart contract (`GitChainAnchor.sol`). | *"Mines an immutable state transaction on-chain. Gas is metered and event topics are logged permanently."* |
-| **`tamper`** | `tamper` / `verify` | Interactive Viva Demo: Modifies a byte in build logs and proves the smart contract REVERTS! | *"Demonstrates zero-trust verification. Because blockchain is immutable, the contract rejects the altered state."* |
+| **`tamper`** | `tamper` / `tamper-demo` | Interactive Viva Demo: Modifies a byte in build logs and proves the smart contract REVERTS! | *"Demonstrates zero-trust verification. Because blockchain is immutable, the contract rejects the altered state."* |
+| **`verify`** | `verify [report.json]` | Standalone verifier: independently recalculates digital seal, raw leaves, and Merkle root. | *"Validates integrity without running the main app, proving external auditability."* |
+| **`test`** | `test` / `tests` | Runs automated 14-test verification suite (Merkle, AI rules, EVM schemas). | *"Proves system reliability and edge-case handling with full unit test coverage."* |
+| **`push`** | `push` / `publish` | Pushes authenticated repository states to your GitHub remote. | *"Demonstrates live interaction with remote GitHub repository via Git Credential Manager."* |
 | **`export`** | `export` / `report` | Exports tamper-evident audit report serialized in JSON with HMAC-SHA256 seal. | *"Produces a machine-readable compliance manifest compliant with NIST SP 800-218 and SLSA Level 4."* |
 | **`demo`** | `demo` / `auto` | Runs the entire automated end-to-end DevSecOps pipeline with background traces. | *"Executes the full pipeline lifecycle sequentially: Capture -> Scan -> Merkle -> Anchor -> Export."* |
 | **`trace`** | `trace [on \| off]` | Toggles real-time low-level system background execution traces. | *"Enables microsecond diagnostic telemetry showing socket calls, zlib inflations, and EVM RPC calls."* |
@@ -122,3 +125,59 @@ To deliver a compelling presentation for strict faculty:
 (git-chain) [NavdeepNP/main:0x71c9] ❯ export
 ```
 > *Explain: "We export the complete, tamper-evident JSON audit certificate featuring an HMAC-SHA256 digital seal compliant with NIST SP 800-218 and SLSA Level 4."*
+
+```
+(git-chain) [NavdeepNP/main:0x71c9] ❯ verify
+```
+> *Explain: "We independently verify the exported manifest using our standalone verification engine, confirming the digital seal and O(log N) inclusion proofs."*
+
+```
+(git-chain) [NavdeepNP/main:0x71c9] ❯ test
+```
+> *Explain: "We run our automated 14-test verification suite covering Merkle tree odd-leaf duplication, avalanche sensitivity, and MITRE ATT&CK AI rules."*
+
+---
+
+## 📂 Repository File Structure
+
+```
+Git-End sem/
+├── contracts/
+│   └── GitChainAnchor.sol          # Solidity smart contract (EVM Sepolia / ERC-6384)
+├── hooks/
+│   └── pre-push                    # Automated Git hook blocking compromised pushes
+├── .github/workflows/
+│   └── git-chain-verify.yml        # CI/CD GitHub Actions automated pipeline
+├── tests/
+│   └── test_git_chain.py           # 14 automated unit tests (Merkle, AI, EVM)
+├── docs/
+│   ├── ARCHITECTURE.md             # System architecture & sequence diagrams
+│   ├── PROJECT_REPORT.md           # Full IEEE-format capstone project report
+│   └── VIVA_CHEAT_SHEET.md         # Top 15 tough questions & winning viva answers
+├── git_chain.py                    # Main interactive Git replica & CLI shell
+├── verify_audit.py                 # Standalone independent audit verifier
+├── requirements.txt                # Python project dependencies
+├── .gitignore                      # Git ignore patterns
+└── README.md                       # Master documentation
+```
+
+---
+
+## 🔒 Pushing to Your GitHub Profile
+
+**Security Notice:** Never enter your GitHub password or private tokens into chat prompts or hardcode them into scripts.
+
+To publish this repository to your GitHub account:
+
+1. Create a repository on GitHub:
+   - Go to [github.com/new](https://github.com/new).
+   - Enter repository name: `git-chain-core`.
+   - Leave "Add a README file" **unchecked** (we already have this README).
+   - Click **Create repository**.
+
+2. From PowerShell or your terminal in this directory, run:
+   ```powershell
+   git push -u origin main
+   ```
+   Windows Git Credential Manager will securely open a browser authentication window asking you to authorize Git. Click **Authorize**, and Git will securely upload all files to your profile!
+
